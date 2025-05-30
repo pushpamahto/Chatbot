@@ -1,0 +1,311 @@
+
+:root {
+    --primary: #6a11cb;
+    --secondary: #2575fc;
+    --accent: #ff6b6b;
+    --grey: #f5f5f5;
+    --black: #1a1a1a;
+    --success: #4caf50;
+    --error: #f44336;
+}
+
+body.chat-open {
+    .chat-window {
+        display: flex;
+    }
+}
+
+.chat-button {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    z-index: 998;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+    transition: all 0.3s;
+    
+    img {
+        width: 50px;
+        filter: brightness(0) invert(1);
+    }
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(106, 17, 203, 0.6);
+    }
+}
+
+.chat-window {
+    * {
+        font-family: "Raleway", sans-serif;
+    }
+
+    display: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    position: absolute;
+    z-index: 999;
+    bottom: 60px;
+    right: 20px;
+    height: 600px;
+    width: 360px;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    /* Floating bubbles container */
+    .bubbles-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    /* Individual bubble elements */
+    .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(106, 17, 203, 0.15);
+        animation: floatBubbles linear infinite;
+        opacity: 0;
+        
+        /* Create multiple bubbles with different sizes and positions */
+        /* Assuming this is inside a parent like .bubble or .bubble-container */
+&:nth-child(1) {
+  width: 120px;  /* Large */
+  height: 120px;
+  top: 90%;
+  left: 10%;
+  animation-duration: 15s;
+  animation-delay: 0s;
+}
+
+&:nth-child(2) {
+  width: 60px;  /* Medium */
+  height: 60px;
+  top: 90%;
+  left: 25%;
+  animation-duration: 18s;
+  animation-delay: 1s;
+}
+
+&:nth-child(3) {
+  width: 15px;  /* Small */
+  height: 15px;
+  top: 90%;
+  left: 45%;
+  animation-duration: 22s;
+  animation-delay: 2s;
+}
+
+&:nth-child(4) {
+  width: 800px;  /* Medium-Large */
+  height: 800px;
+  top: 90%;
+  left: 60%;
+  animation-duration: 20s;
+  animation-delay: 0.5s;
+}
+
+&:nth-child(5) {
+  width: 250px;  /* Small-Medium */
+  height: 250px;
+  top: 90%;
+  left: 75%;
+  animation-duration: 25s;
+  animation-delay: 3s;
+}
+
+&:nth-child(6) {
+  width: 1000px;  /* Large */
+  height: 1000px;
+  top: 90%;
+  left: 90%;
+  animation-duration: 30s;
+  animation-delay: 4s;
+}
+
+    }
+
+    .close {
+        border: none;
+        padding: 12px 0;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 20px 20px 0 0;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .chat {
+        flex: 1;
+        padding: 15px 8px;
+        overflow-y: scroll;
+        position: relative;
+        z-index: 1;
+
+        p {
+            border-radius: 20px;
+            width: 80%;
+            margin: 8px 0;
+            font-size: 16px;
+            padding: 16px;
+            position: relative;
+            animation: bubbleAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        div.model {
+            p {
+                background-color: var(--grey);
+                color: var(--black);
+                border-bottom-left-radius: 5px;
+            }
+        }
+
+        div.user {
+            display: flex;
+            justify-content: flex-end;
+
+            p {
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: white;
+                border-bottom-right-radius: 5px;
+            }
+        }
+
+        div.error {
+            p {
+                font-size: 14px;
+                text-align: center;
+                color: white;
+                background-color: var(--error);
+                width: 90%;
+                animation: shake 0.5s;
+            }
+        }
+    }
+
+    .input-area {
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        position: relative;
+        z-index: 2;
+
+        input {
+            height: 45px;
+            flex: 1;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: var(--grey);
+            border-radius: 25px;
+            padding-left: 20px;
+            font-size: 16px;
+            transition: all 0.3s;
+            
+            &:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+            }
+        }
+
+        button {
+            height: 45px;
+            width: 45px;
+            border-radius: 100%;
+            border: none;
+            margin-left: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(106, 17, 203, 0.3);
+            
+            img {
+                width: 20px;
+                filter: brightness(0) invert(1);
+            }
+
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            }
+        }
+    }
+}
+
+/* Bubbles floating animation */
+@keyframes floatBubbles {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-500px) translateX(20px);
+        opacity: 0;
+    }
+}
+
+/* Message appear animation */
+@keyframes bubbleAppear {
+    0% {
+        transform: scale(0.5) translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.loader {
+    width: 40px;
+    aspect-ratio: 4;
+    background: 
+        radial-gradient(circle closest-side, var(--primary) 90%, #0000) 0/calc(100%/3) 100% space;
+    clip-path: inset(0 100% 0 0);
+    animation: l1 1.5s steps(4) infinite;
+}
+
+@keyframes l1 {
+    to {
+        clip-path: inset(0 -34% 0 0);
+    }
+}
